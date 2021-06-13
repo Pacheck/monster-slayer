@@ -31,6 +31,16 @@ new Vue({
             this.currentRound++;
             const attackValue = getRandomNumber(20, 25);
             this.monsterHealth -= attackValue;
+        },
+        healPlayer() {
+            this.currentRound++;
+            const healValue = getRandomNumber(16, 10);
+            if(this.playerHealth + healValue > 100){
+                this.playerHealth = 100;
+            }else{
+                this.playerHealth += healValue;
+            }
+            this.attackPlayer();
         }
     }
 });
