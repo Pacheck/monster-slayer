@@ -38,7 +38,7 @@
       </section>
       <section id="controls" v-else>
         <button @click="attackMonster">ATTACK</button>
-        <button @click="specialAttackMonster" :disabled="myUseSpecialAttack">
+        <button @click="specialAttackMonster" :disabled="mayUseSpecialAttack">
           SPECIAL ATTACK
         </button>
         <button @click="healPlayer">HEAL</button>
@@ -46,7 +46,21 @@
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="logs in battleLog">
+            <span :class="getClass(logs.actionBy)"
+              >{{ logs.actionBy === 'player' ? 'Player' : 'Monster' }}</span
+            >
+            <span v-if="logs.actionType === 'heal'">
+              {{ logs.actionBy }} heals himself for
+              <span class="log--heal">{{ logs.actionValue }}</span>
+            </span>
+            <span v-else>
+              attacks and deals
+              <span class="log--damage">{{ logs.actionValue }}</span>
+            </span>
+          </li>
+        </ul>
       </section>
     </div>
   </body>
